@@ -1,0 +1,10 @@
+{
+  "$schema": "https://www.partykit.io/schema.json",
+  "name": "void-meddler",
+  "main": "src/index.ts",
+  "parties": {
+    "sessions": "src/sessions.ts",
+    "session": "src/session.ts"
+  },
+  "compatibilityDate": "2024-01-16"
+}

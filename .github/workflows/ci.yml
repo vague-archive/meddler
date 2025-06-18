@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  biome:
+    name: 🐝 Biome
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: ⎔ Setup bun
+        uses: oven-sh/setup-bun@v1
+
+      - name: 💾 Install dependencies
+        run: bun install
+
+      - name: 🔬 Lint & Format Check
+        run: bun ci:biome
+
+  typecheck:
+    name: ʦ TypeScript
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: ⎔ Setup bun
+        uses: oven-sh/setup-bun@v1
+
+      - name: 💾 Install dependencies
+        run: bun install
+
+      - name: 🔎 Type check
+        run: bun ci:typecheck
